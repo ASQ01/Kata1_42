@@ -1,12 +1,14 @@
 package IS2;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Person {
     private final String name;
-    private final Date birthday;
+    private final Calendar birthday;
+    private final long millisPerYear = (long)(365.25*24*60*60*1000L);
     
-    public Person(String name, Date birthday){
+    public Person(String name, Calendar birthday){
         this.name = name;
         this.birthday = birthday;
     }
@@ -16,7 +18,8 @@ public class Person {
     }
     
     public int getAge(){
-        return  (int)((new Date().getTime() - birthday.getTime()) / 31536000000L);
+        Calendar now = GregorianCalendar.getInstance();
+        return  (int)((now.getTimeInMillis() - birthday.getTimeInMillis()) / millisPerYear);
     }
     
 }
